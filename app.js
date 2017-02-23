@@ -1,5 +1,5 @@
 var app = angular.module('myApp', []);
-app.controller('todoCtrl', function ($scope) {
+app.controller('todoCtrl', ["$scope", function ($scope) {
     $scope.todoList = [];
 
     $scope.todoAdd = function () {
@@ -28,5 +28,5 @@ app.controller('todoCtrl', function ($scope) {
         document.getElementById('light').style.display = 'none';
         document.getElementById('fade').style.display = 'none'
     }
-});
+}]);
 
