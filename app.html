@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sagoon-to do app</title>
+  <link href="app.css" rel="stylesheet"></link>
+</head>
+
+<body ng-app="myApp" ng-controller="todoCtrl">
+
+  <div id="toDoAppContainer">
+    <h1 class="text-center">My Todo List</h1>
+    <br/>
+
+    <table ng-if="todoList.length">
+      <thead>
+        <tr>
+          <th class="wid60">S No.</th>
+          <th class="wid340">Title</th>
+          <th class="wid80">Check</th>
+          <th class="wid80">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="task in todoList track by $index">
+          <td class="wid60 text-center" ng-bind="$index+1" ng-class="{'strikethrough':task.done}"></td>
+          <td class="wid340 padL15" ng-bind="task.taskName" ng-class="{'strikethrough':task.done}"></td>
+          <td class="wid80 text-center"><input type="checkbox" ng-model="task.done" /></td>
+          <td class="wid80 text-center"><button class="todo-remove-btn" ng-click="delete($index)">X</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="text-center add-btn">
+      <button class="btn btn-remove " ng-click="remove()">Remove marked</button>
+      <button class="btn btn-primary" ng-click="addToDo()">Add</button>
+    </div>
+  </div>
+
+  <div id="fade" class="black_overlay"></div>
+
+  <div id="light" class="white_content">
+    <button class="close-btn" ng-click="hideAddForm()">X</button><br/>
+    <form name="addForm" id="addForm" ng-submit="addForm.$valid">
+      <label>Enter Task Name</label><br/>
+      <input type="text" ng-model="todoInput" class="form-control" placeholder="Add New Task" required>
+
+      <button class="btn btn-primary submit-btn" type="submit" ng-click="todoAdd()" ng-class="{'submit-btn-disable':addForm.$invalid}"
+        ng-disabled="addForm.$invalid">Submit</button>
+    </form>
+  </div>
+
+  <script src="angular.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
